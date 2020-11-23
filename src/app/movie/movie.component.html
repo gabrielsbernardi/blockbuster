@@ -1,0 +1,31 @@
+<p-card>
+  <div class="p-mb-3">
+    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="onRowSelect(null)"></p-button>
+  </div>
+  <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
+      currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
+      selectionMode="single" (onRowSelect)="onRowSelect($event.data)">
+      <ng-template pTemplate="header">
+        <tr>
+            <th>Título</th>
+            <th>Capa</th>
+            <th>Preço</th>
+            <th>Lançamento</th>
+            <th>Principais Diretores</th>
+            <th>Gênero</th>
+            <th>Descrição</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-movie>
+          <tr [pSelectableRow]="movie">
+            <td>{{movie.title}}</td>
+            <td><img [src]="movie.url" [alt]="movie.url" width="100" class="p-shadow-4"/></td>
+            <td>{{movie.price}}</td>
+            <td>{{movie.launch}}</td>
+            <td>{{movie.mainDirectors}}</td>
+            <td>{{movie.gender}}</td>
+            <td>dadasdasdas</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</p-card>
