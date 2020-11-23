@@ -1,6 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Movie } from '@model/movie';
 import { LanguageEnum } from '@model/language-enum';
@@ -27,37 +29,25 @@ export class MovieDetailComponent implements OnInit {
   languages = Object.keys(LanguageEnum).map(key => ({ label: LanguageEnum[key], value: key }));
 
   constructor(private movieService: MovieService,
-              private activatedRoute: ActivatedRoute) {
-  }
+              private activatedRoute: ActivatedRoute,
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadPage();
   }
 
-  movie: Movie = {
-    number: 1,
-    productType: ProductTypeEnum.DVD,
-    movieType: MovieTypeEnum.HOURS_12,
-    gender: GenderEnum.ACAO,
-    title: "V&F",
-    mainActors: "Paul",
-    mainDirectors: "Steven",
-    provider: ProviderEnum.GLOBOSAT,
-    languageType: LanguageEnum.PT_BR,
-    price: 12,
-    launch: new Date(),
-    url: "www."
-  };
-
   private loadPage = () => {
-    this.movieEntity = this.movie;
+    this.movieEntity = new Movie();
+    let launch = new Date();
 
     if (!this.isNew()) {
-      this.movieEntity = this.activatedRoute.snapshot.data.entity as Movie;
+      this.movieEntity = this.activatedRoute.snapshot.data.entity[0] as Movie;
+      launch = new Date(this.movieEntity.launch);
     }
 
     this.movieFormGroup = new FormGroup({
-      number: new FormControl(this.movieEntity.number, Validators.required),
+      id: new FormControl(this.movieEntity.id, Validators.required),
       productType: new FormControl(this.movieEntity.productType, Validators.required),
       movieType: new FormControl(this.movieEntity.movieType, Validators.required),
       gender: new FormControl(this.movieEntity.gender, Validators.required),
@@ -67,22 +57,39 @@ export class MovieDetailComponent implements OnInit {
       provider: new FormControl(this.movieEntity.provider, Validators.required),
       languageType: new FormControl(this.movieEntity.languageType, Validators.required),
       price: new FormControl(this.movieEntity.price, Validators.required),
-      launch: new FormControl(new Date(this.movieEntity.launch), Validators.required),
-      url: new FormControl(this.movieEntity.url, Validators.required)
+      launch: new FormControl(launch, Validators.required),
+      url: new FormControl(this.movieEntity.url, Validators.required),
+      description: new FormControl(this.movieEntity.description, Validators.required)
     });
+    this.spinner.hide();
   }
 
   private isNew = () => this.activatedRoute.snapshot.params.id === 'new';
 
-  onSave = () => {
+  onSave = async () => {
+    this.spinner.show();
     this.movieEntity = this.movieFormGroup.value;
-    if (this.isNew()) {
-      try {
-        this.movieService.save(this.movieEntity);
-      } catch (error) {
 
+    const teste = await this.movieService.get(this.movieEntity.id).toPromise();
+    console.log(teste)
+    if (false) {
+      if (this.isNew()) {
+        await this.movieService.save(this.movieEntity).toPromise();
+      } else {
+        await this.movieService.update(this.movieEntity).toPromise();
       }
+    } else {
+      alert('treta')
     }
+    this.spinner.hide();
+    this.toastr.success(
+      'Recebimento atualizado!',
+      'Sucesso'
+    );
+  }
+
+  onImgError = event => {
+    event.target.src = 'assets/img/no-image.png';
   }
 
   onLoadImage = () => {

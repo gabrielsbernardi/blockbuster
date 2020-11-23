@@ -5,7 +5,7 @@ import { MovieTypeEnum } from '@model/movie-type-enum';
 import { ProductTypeEnum } from '@model/product-type-enum';
 
 export class Movie {
-  number: number;
+  id: number;
   productType: ProductTypeEnum;
   movieType: MovieTypeEnum;
   gender: GenderEnum;
@@ -14,7 +14,8 @@ export class Movie {
   mainDirectors: string;
   provider: ProviderEnum;
   languageType: LanguageEnum;
-  price: number;
+  price = 0;
   launch: Date;
   url: string;
+  description: string;
 }

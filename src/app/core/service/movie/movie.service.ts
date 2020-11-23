@@ -1,37 +1,26 @@
 import { Injectable } from '@angular/core';
-
-
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Movie } from '@model/movie';
-import { Observable } from 'rxjs';
+import { environment } from '@environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
-  private urlToJson = 'assets/data/movies.json';
+  private baseUrl = environment.url;
+  private movieUrl = `${this.baseUrl}/movie`;
+  private getMovieByIdUrl = (id: number) => `${this.movieUrl}?id=${id}`;
 
   constructor(public http: HttpClient) { }
 
-  getValeus = (): Observable<Movie[]> => {
-    return this.http.get<Movie[]>(this.urlToJson);
-  };
+  getValeus = (): Observable<Movie[]> => this.http.get<Movie[]>(this.movieUrl);
 
-  get = (id: number): Movie => {
-    const movies = this.http.get<Movie[]>(this.urlToJson).toPromise();
-    // return movies.find(movie => movie.number == id);
-    return null
-  }
+  get = (id: number): Observable<Movie> => this.http.get<Movie>(this.getMovieByIdUrl(id));
 
-  save(movie: Movie) {
-    this.http.post<Movie>(this.urlToJson, movie);
-    // movies.push(movie);
-    // if (this.get(movie.number) === null) {
-    //   movies.push(movie);
-    // } else {
-    //   throw EvalError(`Já existe um filme cadastrado com o número: ${movie.number}`);
-    // }
-  }
+  save = (movie: Movie) => this.http.post<Movie>(this.movieUrl, movie);
+
+  update = (movie: Movie) => this.http.put<Movie>(this.movieUrl, movie);
 }

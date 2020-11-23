@@ -7,16 +7,13 @@
   </div>
 </div>
 
-<!-- <div class="p-grid">
-  <div class="p-col">1</div>
-  <div class="p-col">2</div>
-  <div class="p-col">3</div>
-</div> -->
-
 <div class="p-grid">
   <div class="p-col-4">
 <p-menu #menu [popup]="true" [model]="items" styleClass="menucus"></p-menu>
 </div>
 </div>
 
-<router-outlet></router-outlet>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true"></ngx-spinner>
+
+<router-outlet>
+</router-outlet>

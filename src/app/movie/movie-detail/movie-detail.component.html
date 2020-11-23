@@ -1,81 +1,106 @@
+
+
 <p-card>
   <form [formGroup]="movieFormGroup">
     <div class="p-grid">
 
-      <div class="p-col-3 p-field">
-          <label for="productType">Tipo do Produto</label>
-          <p-dropdown id="productType" formControlName="productType" [options]="productTypes"></p-dropdown>
+
+
+
+
+
+
+
+
+
+
+      <div class="p-col-8">
+        <p-card header="Sobre">
+          <div class="p-grid">
+            <div class="p-col-6">
+              <div class="p-field">
+                <label for="number">Número</label>
+                <p-inputNumber inputId="number" formControlName="id">
+                </p-inputNumber>
+              </div>
+
+              <div class="p-field">
+                <label for="title">Título</label>
+                <input id="title" type="text" formControlName="title" pInputText/>
+              </div>
+
+              <div class="p-field">
+                <label for="gender">Gênero</label>
+                <p-dropdown id="gender" formControlName="gender" [options]="genderTypes"></p-dropdown>
+              </div>
+
+              <div class="p-field">
+                <label for="mainActors">Principais Atores</label>
+                <input id="mainActors" type="text" formControlName="mainActors" pInputText/>
+              </div>
+
+              <div class="p-field">
+                <label for="mainDirectors">Principais Diretores</label>
+                <input id="mainDirectors" type="text" formControlName="mainDirectors" pInputText/>
+              </div>
+
+              <div class="p-field">
+                <label for="description">Descrição</label>
+                <textarea id="description" [rows]="5" formControlName="description" pInputTextarea autoResize="autoResize"></textarea>
+              </div>
+            </div>
+
+            <div class="p-col-6">
+              <div class="p-field">
+                <label for="languageType">Idioma</label>
+                <p-dropdown id="languageType" formControlName="languageType" [options]="languages"></p-dropdown>
+              </div>
+
+              <div class="margin-b-1em">
+                <label for="launch">Lançamento</label>
+                <p-calendar id="launch" [showIcon]="true" formControlName="launch" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05em"></p-calendar>
+              </div>
+
+              <div class="p-field">
+                <label for="provider">Fornecedor</label>
+                <p-dropdown id="provider" formControlName="provider" [options]="providers"></p-dropdown>
+              </div>
+
+              <div class="p-field">
+                <label for="productType">{{ 'movie.edit.product-type' | translate }}</label>
+                <p-dropdown id="productType" formControlName="productType" [options]="productTypes"></p-dropdown>
+              </div>
+
+              <div class="p-field">
+                <label for="movieType">Tipo do Filme</label>
+                <p-dropdown id="movieType" formControlName="movieType" [options]="movieTypes"></p-dropdown>
+              </div>
+
+              <div class="p-field">
+                <label for="price">Preço</label>
+                <p-inputNumber id="price" mode="decimal" formControlName="price" prefix="R$" [minFractionDigits]="2">
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+        </p-card>
       </div>
 
-      <div class="p-col-3 p-field">
-        <label for="movieType">Tipo do Filme</label>
-        <p-dropdown id="movieType" formControlName="movieType" [options]="movieTypes"></p-dropdown>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="gender">Gênero</label>
-        <p-dropdown id="gender" formControlName="gender" [options]="genderTypes"></p-dropdown>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="provider">Fornecedor</label>
-        <p-dropdown id="provider" formControlName="provider" [options]="providers"></p-dropdown>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="languageType">Idioma</label>
-        <p-dropdown id="languageType" formControlName="languageType" [options]="languages"></p-dropdown>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="price">Preço</label>
-        <p-inputNumber id="price" mode="decimal" formControlName="price" prefix="R$" [minFractionDigits]="2">
-        </p-inputNumber>
-      </div>
-
-      <div class="p-col-3">
-        <label for="dateRegister">Lançamento</label>
-        <p-calendar id="dateRegister" [showIcon]="true" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05em"></p-calendar>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="number">Número</label>
-        <p-inputNumber inputId="number" formControlName="number">
-        </p-inputNumber>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="title">Título</label>
-        <input id="title" type="text" formControlName="title" pInputText/>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="mainActors">Principais Atores</label>
-        <input id="mainActors" type="text" formControlName="mainActors" pInputText/>
-      </div>
-
-      <div class="p-col-3 p-field">
-        <label for="mainDirectors">Principais Diretores</label>
-        <input id="mainDirectors" type="text" formControlName="mainDirectors" pInputText/>
-      </div>
-
-      <div class="p-col-3">
-        <label for="url">URL</label>
-        <div id="url" class="p-inputgroup margin-t-05em">
-          <input type="text" formControlName="url" pInputText>
-          <button type="button" pButton pRipple icon="pi pi-refresh" styleClass="p-button-warn" pTooltip="Carregar Imagem" (click)="onLoadImage()"></button>
-        </div>
+      <div class="p-col-4">
+        <p-card header="Capa">
+          <label for="url">URL</label>
+          <div id="url" class="p-inputgroup margin-t-05em">
+            <input type="text" formControlName="url" pInputText>
+            <button type="button" pButton pRipple icon="pi pi-refresh" styleClass="p-button-warn" pTooltip="Carregar Imagem" (click)="onLoadImage()"></button>
+          </div>
+          <img class="margin-t-05em height-32em" [src]="movieEntity.url ? movieEntity.url : 'assets/img/no-image.png'" (error)="onImgError($event)" alt="movieEntity.url" width="100%">
+        </p-card>
       </div>
     </div>
   </form>
 
-  <div class="p-col-6">
-    <p-card header="Imagem">
-      <img src='{{movieEntity.url}}' alt='image' width="100%" height="100%">
-    </p-card>
-  </div>
-
   <p-footer>
-    <p-button type="submit" label="Salvar" [disabled]="!movieFormGroup.valid" (click)="onSave()"></p-button>
+    <p-button type="submit" pRipple label="Salvar" (click)="onSave()"></p-button>
+    <!-- <p-button type="button" pRipple label="Danger" class="p-button-danger"></p-button> -->
   </p-footer>
 </p-card>

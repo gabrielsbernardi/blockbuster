@@ -18,9 +18,11 @@
     ],
     "paths": {
       "@app/*": ["src/app/*"],
+      "@core/*": ["src/app/core/*"],
       "@data/*": ["src/assets/data/*"],
       "@model/*": ["src/app/core/model/*"],
-      "@service/*": ["src/app/core/service/*"]
+      "@service/*": ["src/app/core/service/*"],
+      "@environment/*": ["src/environments/*"]
     }
   }
 }
