@@ -1,4 +1,38 @@
 {
+  "enum": {
+    "product-type": {
+      "BLU_RAY": "Blu-ray",
+      "DVD": "DVD",
+      "VHS": "VHS"
+    },
+    "movie-type": {
+      "HOURS_6": "6 Horas",
+      "HOURS_12": "12 Horas",
+      "HOURS_18": "18 Horas",
+      "HOURS_24": "24 Horas"
+    },
+    "gender-type": {
+      "ACAO": "Ação",
+      "AVENTURA": "Aventura",
+      "COMEDIA": "Comédia",
+      "DRAMA": "Drama",
+      "FANTASIA": "Fantasia",
+      "TERROR": "Terror"
+    },
+    "provider": {
+      "TELECINE": "Telecine",
+      "HBO": "HBO",
+      "GLOBOSAT": "Globosat",
+      "SNAG": "SNAG",
+      "MUBI": "MUBI"
+    },
+    "language-type": {
+      "PT_BR": "pt-br",
+      "EN_US": "en-US",
+      "ES": "es",
+      "FR": "fr"
+    }
+  },
   "movie": {
     "list": {
 

@@ -1,36 +1,22 @@
-
-
-<p-card>
-  <form [formGroup]="movieFormGroup">
+<form [formGroup]="movieFormGroup">
+  <p-panel [showHeader]="false">
     <div class="p-grid">
-
-
-
-
-
-
-
-
-
-
-
       <div class="p-col-8">
-        <p-card header="Sobre">
+        <p-fieldset legend="Dados Gerais">
           <div class="p-grid">
             <div class="p-col-6">
               <div class="p-field">
-                <label for="number">Número</label>
-                <p-inputNumber inputId="number" formControlName="id">
-                </p-inputNumber>
+                <label for="number" class="required">Número</label>
+                <p-inputNumber inputId="number" formControlName="id"></p-inputNumber>
               </div>
 
               <div class="p-field">
-                <label for="title">Título</label>
+                <label for="title" class="required">Título</label>
                 <input id="title" type="text" formControlName="title" pInputText/>
               </div>
 
               <div class="p-field">
-                <label for="gender">Gênero</label>
+                <label for="gender" class="required">Gênero</label>
                 <p-dropdown id="gender" formControlName="gender" [options]="genderTypes"></p-dropdown>
               </div>
 
@@ -52,55 +38,61 @@
 
             <div class="p-col-6">
               <div class="p-field">
-                <label for="languageType">Idioma</label>
+                <label for="languageType" class="required">Idioma</label>
                 <p-dropdown id="languageType" formControlName="languageType" [options]="languages"></p-dropdown>
               </div>
 
-              <div class="margin-b-1em">
+              <div class="margin-b-1rem">
                 <label for="launch">Lançamento</label>
-                <p-calendar id="launch" [showIcon]="true" formControlName="launch" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05em"></p-calendar>
+                <p-calendar id="launch" [showIcon]="true" formControlName="launch" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem"></p-calendar>
               </div>
 
               <div class="p-field">
-                <label for="provider">Fornecedor</label>
+                <label for="provider" class="required">Fornecedor</label>
                 <p-dropdown id="provider" formControlName="provider" [options]="providers"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="productType">{{ 'movie.edit.product-type' | translate }}</label>
+                <label for="productType" class="required">{{ 'movie.edit.product-type' | translate }}</label>
                 <p-dropdown id="productType" formControlName="productType" [options]="productTypes"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="movieType">Tipo do Filme</label>
+                <label for="movieType" class="required">Tipo do Filme</label>
                 <p-dropdown id="movieType" formControlName="movieType" [options]="movieTypes"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="price">Preço</label>
-                <p-inputNumber id="price" mode="decimal" formControlName="price" prefix="R$" [minFractionDigits]="2">
+                <label for="price" class="required">Preço</label>
+                <p-inputNumber id="price" formControlName="price" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2">
                 </p-inputNumber>
+              </div>
+
+              <div>
+                <label for="evaluation" class="margin-b-05rem">Avaliação</label>
+                <p-rating id="evaluation" formControlName="evaluation" [cancel]="false"></p-rating>
               </div>
             </div>
           </div>
-        </p-card>
+        </p-fieldset>
       </div>
 
       <div class="p-col-4">
-        <p-card header="Capa">
+        <p-fieldset legend="Capa">
           <label for="url">URL</label>
-          <div id="url" class="p-inputgroup margin-t-05em">
+          <div id="url" class="p-inputgroup margin-t-05rem">
             <input type="text" formControlName="url" pInputText>
             <button type="button" pButton pRipple icon="pi pi-refresh" styleClass="p-button-warn" pTooltip="Carregar Imagem" (click)="onLoadImage()"></button>
           </div>
-          <img class="margin-t-05em height-32em" [src]="movieEntity.url ? movieEntity.url : 'assets/img/no-image.png'" (error)="onImgError($event)" alt="movieEntity.url" width="100%">
-        </p-card>
+          <img class="margin-t-05rem height-32-1rem" [src]="movieEntity.url ? movieEntity.url : 'assets/img/no-image.png'" (error)="onImgError($event)" alt="movieEntity.number" width="100%">
+        </p-fieldset>
       </div>
     </div>
-  </form>
 
-  <p-footer>
-    <p-button type="submit" pRipple label="Salvar" (click)="onSave()"></p-button>
-    <!-- <p-button type="button" pRipple label="Danger" class="p-button-danger"></p-button> -->
-  </p-footer>
-</p-card>
+    <p-footer>
+      <p-button type="submit" pRipple label="Salvar" icon="pi pi-save" [disabled]="movieFormGroup.invalid" (click)="movieFormGroup.valid && onSave()"></p-button>
+      <p-button type="button" pRipple label="Excluir" icon="pi pi-trash" styleClass="p-button-danger" [hidden]="isNew()" (click)="onConfirmRemove()"></p-button>
+      <p-button type="button" pRipple label="Voltar" styleClass="p-button-text" (click)="goBack()"></p-button>
+    </p-footer>
+  </p-panel>
+</form>

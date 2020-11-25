@@ -12,6 +12,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RatingModule } from 'primeng/rating';
+import { PanelModule } from 'primeng/panel';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { MovieRoutingModule } from '@app/movie/movie.routing.module';
 import { MovieComponent } from '@app/movie/movie.component';
@@ -25,23 +28,25 @@ import { MovieDetailComponent } from '@app/movie/movie-detail/movie-detail.compo
   imports: [
     MovieRoutingModule,
     TableModule,
+    FormsModule,
+    CommonModule,
     ButtonModule,
     InputTextModule,
-    FormsModule,
     InputNumberModule,
     ReactiveFormsModule,
-    CommonModule,
     DropdownModule,
     CardModule,
     CalendarModule,
     TooltipModule,
     ToastModule,
     InputTextareaModule,
-    TranslateModule
+    TranslateModule,
+    RatingModule,
+    PanelModule,
+    FieldsetModule
   ],
   providers: [
     DatePipe
-  ],
-  bootstrap:    [ MovieDetailComponent ]
+  ]
 })
 export class MovieModule {}

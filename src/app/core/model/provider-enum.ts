@@ -5,9 +5,3 @@ export enum ProviderEnum {
   SNAG = 'SNAG',
   MUBI = 'MUBI'
 }
-
-// TELECINE = 'Telecine',
-//   HBO = 'HBO',
-//   GLOBOSAT = 'Globosat',
-//   SNAG = 'SNAG',
-//   MUBI = 'MUBI'

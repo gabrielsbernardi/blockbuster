@@ -1,6 +1,6 @@
 {
   "name": "blockbuster",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,7 +24,6 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "json-server": "^0.16.3",
     "ngx-spinner": "^10.0.1",
-    "ngx-toastr": "^13.1.0",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.0.0-rc.1",

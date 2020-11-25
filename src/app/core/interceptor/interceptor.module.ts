@@ -1,5 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NgModule, Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -11,10 +9,11 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+import { ToastService } from '@service/toast/toast.service';
+
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
-  constructor(public toastr: ToastrService,
-              public spinner: NgxSpinnerService) {}
+  constructor(private toastService: ToastService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -43,22 +42,27 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       // server-side error
       switch (error.status) {
         case 0:
-          this.toastr.error(
-            'Erro de conexão com o servidor.',
-            'Erro'
+          this.toastService.error(
+            'Erro',
+            'Erro de conexão com o servidor.'
           );
           break;
         case 400:
         case 403:
-          this.toastr.error(
-            error.error.message,
+          this.toastService.error(
+            error.message,
             'Erro'
+          );
+          break;
+        case 404:
+          this.toastService.error(
+            `URL inexiste ${error.url}`,
+            'Verifique se o caminho existe no db.json'
           );
           break;
         default:
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
-      this.spinner.hide();
     }
     console.log(errorMessage);
     return throwError(errorMessage);

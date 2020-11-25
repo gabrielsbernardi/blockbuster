@@ -3,7 +3,3 @@ export enum ProductTypeEnum {
   DVD = 'DVD',
   VHS = 'VHS'
 }
-
-// BLU_RAY = 'Blu-ray',
-//   DVD = 'DVD',
-//   VHS = 'VHS'

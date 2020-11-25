@@ -6,16 +6,17 @@ import { ProductTypeEnum } from '@model/product-type-enum';
 
 export class Movie {
   id: number;
-  productType: ProductTypeEnum;
-  movieType: MovieTypeEnum;
-  gender: GenderEnum;
+  productType = ProductTypeEnum.BLU_RAY;
+  movieType = MovieTypeEnum.HOURS_6;
+  gender = GenderEnum.ACAO;
   title: string;
   mainActors: string;
   mainDirectors: string;
-  provider: ProviderEnum;
-  languageType: LanguageEnum;
+  provider = ProviderEnum.GLOBOSAT;
+  languageType = LanguageEnum.EN_US;
   price = 0;
-  launch: Date;
+  launch = new Date();
   url: string;
   description: string;
+  evaluation = 0;
 }

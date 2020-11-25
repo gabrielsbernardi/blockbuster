@@ -1,6 +1,8 @@
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +14,23 @@ export class AppComponent implements OnInit {
 
   items: MenuItem[];
 
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('pt-BR');
+  constructor(private translate: TranslateService,
+              private router: Router,
+              private spinner: NgxSpinnerService) {
+    this.translate.setDefaultLang('pt-BR');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.items = [
-      {label: 'Filme', icon: 'pi pi-plus', routerLink: ['/movie']},
-      {label: 'Teste', icon: 'pi pi-download', routerLink: ['/second-component']}
+      {label: 'Filme', icon: PrimeIcons.VIDEO, routerLink: ['/movie']}
     ];
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationStart) {
+        this.spinner.show();
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        this.spinner.hide();
+      }
+    });
   }
 }

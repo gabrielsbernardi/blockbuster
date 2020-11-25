@@ -1,34 +1,100 @@
-<p-toast></p-toast>
+<form [formGroup]="movieFilterFormGroup" class="margin-b-1rem">
+  <p-panel [header]="'Filtros'.toUpperCase()" [toggleable]="true" [(collapsed)]="movieFilterCollapsed">
+    <div class="p-grid">
+      <div class="p-col-4 p-field">
+        <label for="title">Título</label>
+        <input id="title" type="text" formControlName="title" pInputText/>
+      </div>
 
-<p-card>
-  <div class="p-mb-3">
-    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" (click)="onRowSelect(null)"></p-button>
-  </div>
-  <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
-      currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
-      selectionMode="single" (onRowSelect)="onRowSelect($event.data)" [scrollable]="true" scrollHeight="40em"
-      styleClass="p-datatable-striped">
-      <ng-template pTemplate="header">
-        <tr>
-            <th>Título</th>
-            <th>Capa</th>
-            <th>Preço</th>
-            <th>Lançamento</th>
-            <th>Principais Diretores</th>
-            <th>Gênero</th>
-            <th>Descrição</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-movie>
-          <tr [pSelectableRow]="movie">
-            <td>{{movie.title}}</td>
-            <td><img [src]="movie.url ? movie.url : 'assets/img/no-image.png'" (error)="onImgError($event)" [alt]="movie.url" width="100" height="85" class="p-shadow-4"/></td>
-            <td>R$ {{movie.price.toFixed(2)}}</td>
-            <td>{{movie.launch | date: 'dd/MM/yyyy'}}</td>
-            <td>{{movie.mainDirectors}}</td>
-            <td>{{movie.gender}}</td>
-            <td>{{movie.description}}</td>
+      <div class="p-col-4 p-field">
+        <label for="mainDirectors">Principais Diretores</label>
+        <input id="mainDirectors" type="text" formControlName="mainDirectors" pInputText/>
+      </div>
+
+      <div class="p-col-4 p-field">
+        <label for="gender">Gênero</label>
+        <p-dropdown id="gender" formControlName="gender" [options]="genderTypes" placeholder="Selecione o Gênero" [showClear]="true"></p-dropdown>
+      </div>
+
+      <p-fieldset legend="Lançamento" class="p-col-4">
+        <div id="launchRange" class="p-grid">
+          <div class="p-col-6">
+            <p-calendar [showIcon]="true" formControlName="initialDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" placeholder="De"></p-calendar>
+          </div>
+          <div class="p-col-6">
+            <p-calendar [showIcon]="true" formControlName="finalDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" placeholder="Até"></p-calendar>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <p-fieldset legend="Preço" class="p-col-4">
+        <div id="priceRange" class="p-grid margin-t-0">
+          <div class="p-col-6">
+            <p-inputNumber formControlName="initialPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="De">
+            </p-inputNumber>
+          </div>
+          <div class="p-col-6">
+            <p-inputNumber formControlName="finalPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="Até">
+            </p-inputNumber>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <div class="p-col-4">
+        <label for="evaluation" class="margin-b-05rem">Avaliação</label>
+        <p-rating id="evaluation" formControlName="evaluation"></p-rating>
+      </div>
+    </div>
+
+    <p-footer>
+      <p-button type="submit" pRipple icon="pi pi-filter" label="Filtrar" (click)="onSearch()"></p-button>
+      <p-button type="button" pRipple label="Limpar" styleClass="p-button-text" (click)="onClear()"></p-button>
+    </p-footer>
+  </p-panel>
+</form>
+
+<p-panel [header]="'Filmes Cadastrados'.toUpperCase()">
+  <div *ngIf="movies.length">
+    <div class="p-mb-3">
+      <button pButton pRipple label="Novo" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
+    </div>
+    <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
+        currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
+        selectionMode="single" (onRowSelect)="onRowSelect($event.data)" styleClass="p-datatable-striped">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Título</th>
+              <th>Capa</th>
+              <th>Preço</th>
+              <th>Lançamento</th>
+              <th>Avaliação</th>
+              <th>Principais Diretores</th>
+              <th>Gênero</th>
+              <th>Descrição</th>
           </tr>
-      </ng-template>
-  </p-table>
-</p-card>
+        </ng-template>
+        <ng-template pTemplate="body" let-movie>
+            <tr [pSelectableRow]="movie">
+              <td>{{movie.title}}</td>
+              <td><img [src]="movie.url ? movie.url : 'assets/img/no-image.png'" (error)="onImgError($event)" [alt]="movie.number" width="100" height="60" class="p-shadow-4"/></td>
+              <td>R$ {{movie.price.toFixed(2)}}</td>
+              <td>{{movie.launch | date: 'dd/MM/yyyy'}}</td>
+              <td><p-rating [ngModel]="movie.evaluation" [readonly]="true" [cancel]="false"></p-rating></td>
+              <td>{{movie.mainDirectors}}</td>
+              <td>{{'enum.gender-type.' + movie.gender | translate}}</td>
+              <td>{{movie.description}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+
+  <div *ngIf="!movies.length" class="empty-list-table">
+    <div>
+      <em class="pi pi-inbox font-size-6rem icon-color"></em>
+    </div>
+    <div>
+      <label class="font-size-1rem bold">Nenhum registro encontrado</label>
+    </div>
+    <p-button type="button" styleClass="margin-t-07rem" label="Adicionar" (click)="onRowSelect(null)"></p-button>
+  </div>
+</p-panel>

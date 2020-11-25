@@ -1,19 +1,16 @@
-<div class="p-grid header" id="header">
-  <div class="p-col-4" style="display: flex; align-items: center;">
-    <a (click)="menu.toggle($event)" class="pi pi-bars" style="color: white; font-size: 1.7em; cursor: pointer;"></a>
+<div class="p-grid header margin-b-1rem" id="header">
+  <div class="p-col-4 menu-icon-align">
+    <a (click)="menu.toggle($event)" class="pi pi-bars menu-icon"></a>
   </div>
   <div class="p-col-4 code-7">
     <img src="assets/img/logo.png" alt="logo">
   </div>
 </div>
 
-<div class="p-grid">
-  <div class="p-col-4">
+<p-confirmDialog [baseZIndex]="10000"></p-confirmDialog>
 <p-menu #menu [popup]="true" [model]="items" styleClass="menucus"></p-menu>
-</div>
-</div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true"></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true" [zIndex]="2"></ngx-spinner>
 
-<router-outlet>
-</router-outlet>
+<p-toast></p-toast>
+<router-outlet></router-outlet>

@@ -1,27 +1,19 @@
 # Blockbuster
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 10.2.0.
 
-## Development server
+## Executar o projeto local
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Intalando e executando o [json-server](https://github.com/typicode/json-server)
 
-## Code scaffolding
+- Execute o comando `npm install -g json-server` para instalar
+- Na raiz deste projeto tem um arquivo exemplo chamado **db.json**:
+    - Copie o arquivo para sua máquina
+    - No diretório copiado executar o seguinte comando `json-server --watch db.json`
+    - Note que vai subir um servidor local na porta 3000 _http://localhost:3000_
+**OBS: Não executar o serve apontado para o arquivo que está na raiz do projeto, pois a cada update no arquivo para a execução das operações é interpretado como uma nova atualização em arquivo e ocorre o live reload**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Executando o projeto
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Execute o comando `npm i` para instalar
+- Execute o comando `ng serve -o` para executar o projeto e abrir automaticamente em seu navegador na URL **http://localhost:4200/**

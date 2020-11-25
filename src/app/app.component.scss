@@ -1,3 +1,9 @@
+p-menu {
+  div {
+    top: 200px !important;
+  }
+}
+
 .header {
   background-color: #30383c;
   height: 56px;
@@ -9,10 +15,13 @@
   align-items: center;
 }
 
-.teste {
-  top: 0px;
+.menu-icon {
+  color: white;
+  font-size: 1.7em;
+  cursor: pointer;
 }
 
-.menucus div {
-  background-color: red;
+.menu-icon-align {
+  display: flex;
+  align-items: center;
 }

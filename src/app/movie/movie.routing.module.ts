@@ -1,9 +1,9 @@
-import { MovieDetailResolver } from './movie.resolve';
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MovieComponent } from '@app/movie/movie.component';
 import { MovieDetailComponent } from '@app/movie/movie-detail/movie-detail.component';
+import { MovieDetailResolver, MovieResolver } from '@app/movie/movie.resolve';
 
 @Component({
   template: '<router-outlet></router-outlet>'
@@ -14,6 +14,9 @@ const routes: Routes = [
   {
     path: 'movie',
     component: EmptyComponent,
+    resolve: {
+      movies: MovieResolver
+    },
     children: [
       {
         path: '',
@@ -30,16 +33,19 @@ const routes: Routes = [
             path: '',
             component: MovieDetailComponent
           }
-        ]
+        ],
       }
     ]
-  },
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   declarations: [EmptyComponent],
-  providers: [MovieDetailResolver]
+  providers: [
+    MovieResolver,
+    MovieDetailResolver
+  ]
 })
 export class MovieRoutingModule {}
