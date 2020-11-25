@@ -44,7 +44,8 @@
 
               <div class="margin-b-1rem">
                 <label for="launch">{{'movie.launch' | translate}}</label>
-                <p-calendar id="launch" [showIcon]="true" formControlName="launch" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem"></p-calendar>
+                <p-calendar id="launch" [showIcon]="true" formControlName="launch" [monthNavigator]="true" [yearNavigator]="true"
+                            yearRange="1950:2030" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem"></p-calendar>
               </div>
 
               <div class="p-field">

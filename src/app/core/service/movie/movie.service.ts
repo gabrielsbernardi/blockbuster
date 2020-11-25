@@ -21,17 +21,27 @@ export class MovieService {
 
   constructor(public http: HttpClient) { }
 
-  getValeus = (): Observable<Movie[]> => this.http.get<Movie[]>(this.movieUrl);
+  public getValeus(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.movieSortUrl);
+  }
 
-  get = (id: number): Observable<Movie> => this.http.get<Movie>(`${this.movieSortUrl}${getSimpleFilter('id', id, false)}`);
+  public get(id: number): Observable<Movie> {
+    return this.http.get<Movie>(`${this.movieUrl}${getSimpleFilter('id', id, false, true)}`);
+  }
 
-  save = (movie: Movie) => this.http.post<Movie>(this.movieUrl, movie);
+  public save(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.movieUrl, movie);
+  }
 
-  update = (id: number, movie: Movie) => this.http.put<Movie>(`${this.movieUrl}/${id}`, movie);
+  public update(id: number, movie: Movie): Observable<Movie> {
+    return this.http.put<Movie>(`${this.movieUrl}/${id}`, movie);
+  }
 
-  delete = (id: number) => this.http.delete<Movie>(`${this.movieUrl}/${id}`);
+  public delete(id: number): Observable<Movie> {
+    return this.http.delete<Movie>(`${this.movieUrl}/${id}`);
+  }
 
-  searchByFilter(filter: MovieFilter): Observable<Movie[]> {
+  public searchByFilter(filter: MovieFilter): Observable<Movie[]> {
     const filterTitle = getSimpleFilter('title', filter.title);
     const filterMainDirectors = getSimpleFilter('mainDirectors', filter.mainDirectors);
     const filterGender = getSimpleFilter('gender', filter.gender);

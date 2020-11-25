@@ -19,10 +19,12 @@
       <p-fieldset [legend]="'movie.launch' | translate" class="p-col-4">
         <div id="launchRange" class="p-grid">
           <div class="p-col-6">
-            <p-calendar [showIcon]="true" formControlName="initialDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'in' | translate"></p-calendar>
+            <p-calendar [showIcon]="true" formControlName="initialDate" appendTo="body" [monthNavigator]="true" [yearNavigator]="true"
+                        yearRange="1950:2030" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'in' | translate"></p-calendar>
           </div>
           <div class="p-col-6">
-            <p-calendar [showIcon]="true" formControlName="finalDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'to' | translate"></p-calendar>
+            <p-calendar [showIcon]="true" formControlName="finalDate" appendTo="body" [monthNavigator]="true" [yearNavigator]="true"
+                        yearRange="1950:2030" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'to' | translate"></p-calendar>
           </div>
         </div>
       </p-fieldset>
@@ -54,9 +56,9 @@
 </form>
 
 <p-panel [header]="'registered-movies' | translate | uppercase">
-  <div *ngIf="movies.length">
+  <div *ngIf="hasData">
     <div class="p-mb-3">
-      <button pButton pRipple [label]="'new' | translate" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
+      <button pButton pRipple [label]="'add' | translate" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
     </div>
     <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
@@ -76,7 +78,7 @@
         <ng-template pTemplate="body" let-movie>
             <tr [pSelectableRow]="movie">
               <td>{{movie.title}}</td>
-              <td><img [src]="movie.url ? movie.url : 'assets/img/no-image.png'" (error)="onImgError($event)" [alt]="movie.number" width="100" height="60" class="p-shadow-4"/></td>
+              <td><img [src]="movie.url ? movie.url : 'assets/img/no-image.png'" (error)="onImgError($event)" [alt]="movie.number" width="100" height="100" class="p-shadow-4"/></td>
               <td>R$ {{movie.price.toFixed(2)}}</td>
               <td>{{movie.launch | date: 'dd/MM/yyyy'}}</td>
               <td><p-rating [ngModel]="movie.evaluation" [readonly]="true" [cancel]="false"></p-rating></td>
@@ -88,7 +90,7 @@
     </p-table>
   </div>
 
-  <div *ngIf="!movies.length" class="empty-list-table">
+  <div *ngIf="!hasData" class="empty-list-table">
     <div>
       <em class="pi pi-inbox font-size-6rem icon-color"></em>
     </div>

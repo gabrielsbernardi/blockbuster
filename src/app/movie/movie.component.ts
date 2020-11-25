@@ -17,10 +17,11 @@ export class MovieComponent implements OnInit {
   public movies: Movie[];
   public first = 0;
   public rows = 10;
-  public movieFilterCollapsed = false;
+  public movieFilterCollapsed = true;
+  public hasData = false;
 
   public movieFilterFormGroup: FormGroup;
-  genderTypes = Object.keys(GenderEnum).map(key =>
+  public genderTypes = Object.keys(GenderEnum).map(key =>
     ({ label: this.translate.instant(`enum.gender-type.${GenderEnum[key]}`), value: key }));
 
   constructor(private movieService: MovieService,
@@ -29,11 +30,11 @@ export class MovieComponent implements OnInit {
               private spinner: NgxSpinnerService,
               private translate: TranslateService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadPage();
   }
 
-  private loadPage = () => {
+  private async loadPage(): Promise<void> {
     this.movieFilterFormGroup = new FormGroup({
       title: new FormControl(),
       mainDirectors: new FormControl(),
@@ -44,25 +45,26 @@ export class MovieComponent implements OnInit {
       gender: new FormControl(),
       evaluation: new FormControl()
     });
-    this.movies = this.activatedRoute.snapshot.data.movies;
+    this.movies = await this.movieService.getValeus().toPromise();
+    this.hasData = this.movies.length > 0;
   }
 
-  onImgError = event => {
+  public onImgError(event): void {
     event.target.src = 'assets/img/no-image.png';
   }
 
-  onRowSelect = (movie: Movie) => {
+  public onRowSelect(movie: Movie): void {
     this.router.navigate((movie === null ? ['new'] : [movie.id]), { relativeTo: this.activatedRoute });
   }
 
-  onSearch = async () => {
+  public async onSearch(): Promise<void> {
     this.spinner.show();
     this.movieFilterCollapsed = true;
     this.movies = await this.movieService.searchByFilter(this.movieFilterFormGroup.value).toPromise();
     this.spinner.hide();
   }
 
-  onClear = async () => {
+  public async onClear(): Promise<void> {
     this.spinner.show();
     this.movieFilterFormGroup.reset();
     this.movies = await this.movieService.getValeus().toPromise();

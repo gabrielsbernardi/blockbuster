@@ -1,12 +1,14 @@
-export const getSimpleFilter = (field: string, value: any, ignoreCase = true) => {
+export const getSimpleFilter = (field: string, value: any, ignoreCase = true, startFilter = false) => {
   if (value === null || value === '') {
     return '';
   }
 
+  let filter = startFilter ? '?' : '&';
+
   if (ignoreCase) {
-    return `&${field}_like=${value}`;
+    return `${filter}${field}_like=${value}`;
   }
-  return `&${field}=${value}`;
+  return `${filter}${field}=${value}`;
 };
 
 export const getRangeFilter = (field: string, initial: any, final: any) => {

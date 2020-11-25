@@ -5,16 +5,6 @@ import { Movie } from '@model/movie';
 import { MovieService } from '@service/movie/movie.service';
 
 @Injectable()
-export class MovieResolver implements Resolve<Movie[]> {
-
-  constructor(private movieService: MovieService) { }
-
-  resolve = () => {
-    return this.movieService.getValeus().toPromise();
-  }
-}
-
-@Injectable()
 export class MovieDetailResolver implements Resolve<Movie> {
 
   constructor(private movieService: MovieService) { }

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MovieComponent } from '@app/movie/movie.component';
 import { MovieDetailComponent } from '@app/movie/movie-detail/movie-detail.component';
-import { MovieDetailResolver, MovieResolver } from '@app/movie/movie.resolve';
+import { MovieDetailResolver } from '@app/movie/movie.resolve';
 
 @Component({
   template: '<router-outlet></router-outlet>'
@@ -14,9 +14,6 @@ const routes: Routes = [
   {
     path: 'movie',
     component: EmptyComponent,
-    resolve: {
-      movies: MovieResolver
-    },
     children: [
       {
         path: '',
@@ -44,7 +41,6 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [EmptyComponent],
   providers: [
-    MovieResolver,
     MovieDetailResolver
   ]
 })

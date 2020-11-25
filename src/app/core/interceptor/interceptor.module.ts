@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NgModule, Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -13,7 +14,8 @@ import { ToastService } from '@service/toast/toast.service';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService,
+              private spinner: NgxSpinnerService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -65,6 +67,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       }
     }
     console.log(errorMessage);
+    this.spinner.hide()
     return throwError(errorMessage);
   }
 }

@@ -1,15 +1,11 @@
-<div class="p-grid header margin-b-1rem" id="header">
-  <div class="p-col-4 menu-icon-align">
-    <a (click)="menu.toggle($event)" class="pi pi-bars menu-icon"></a>
-  </div>
-  <div class="p-col-4 code-7">
+<div class="p-grid header margin-b-1rem">
+  <div class="p-col-12 code-7">
     <img src="assets/img/logo.png" alt="logo">
   </div>
 </div>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true" [zIndex]="2"></ngx-spinner>
 <p-confirmDialog [baseZIndex]="10000"></p-confirmDialog>
-<p-menu #menu [popup]="true" [model]="items"></p-menu>
 <p-toast></p-toast>
 
 <router-outlet></router-outlet>

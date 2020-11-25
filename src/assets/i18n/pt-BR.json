@@ -59,7 +59,7 @@
   "to": "Até",
   "filter": "Filtrar",
   "clear": "Limpar",
-  "new": "Novo",
+  "add": "Adicionar",
   "select-gender": "Selecione o Gênero",
   "registered-movies": "Filmes cadastrados",
   "filters": "Filtros",
@@ -71,7 +71,8 @@
     "title": "Erro",
     "movie": {
       "already-exists": "Filme com o número {{id}} já existe com o nome: {{title}}"
-    }
+    },
+    "no-records-found": "Nenhum registro encontrado"
   },
   "success": {
     "title": "Sucesso",

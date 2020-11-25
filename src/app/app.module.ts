@@ -10,7 +10,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MenubarModule } from 'primeng/menubar';
 
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
@@ -38,8 +37,7 @@ import { ToastService } from '@service/toast/toast.service';
     InterceptorModule,
     RippleModule,
     ToastModule,
-    ConfirmDialogModule,
-    MenubarModule
+    ConfirmDialogModule
   ],
   providers: [
     MessageService,

@@ -21,18 +21,18 @@ import { ToastService } from '@core/service/toast/toast.service';
 })
 export class MovieDetailComponent implements OnInit {
 
-  movieEntity: Movie;
-  movieFormGroup: FormGroup;
+  public movieEntity: Movie;
+  public movieFormGroup: FormGroup;
 
-  productTypes = Object.keys(ProductTypeEnum).map(key =>
+  public productTypes = Object.keys(ProductTypeEnum).map(key =>
     ({ label: this.translate.instant(`enum.product-type.${ProductTypeEnum[key]}`), value: key }));
-  movieTypes = Object.keys(MovieTypeEnum).map(key =>
+  public movieTypes = Object.keys(MovieTypeEnum).map(key =>
     ({ label: this.translate.instant(`enum.movie-type.${MovieTypeEnum[key]}`), value: key }));
-  genderTypes = Object.keys(GenderEnum).map(key =>
+  public genderTypes = Object.keys(GenderEnum).map(key =>
     ({ label: this.translate.instant(`enum.gender-type.${GenderEnum[key]}`), value: key }));
-  providers = Object.keys(ProviderEnum).map(key =>
+  public providers = Object.keys(ProviderEnum).map(key =>
     ({ label: this.translate.instant(`enum.provider.${ProviderEnum[key]}`), value: key }));
-  languages = Object.keys(LanguageEnum).map(key =>
+  public languages = Object.keys(LanguageEnum).map(key =>
     ({ label: this.translate.instant(`enum.language-type.${LanguageEnum[key]}`), value: key }));
 
   constructor(private movieService: MovieService,
@@ -43,11 +43,11 @@ export class MovieDetailComponent implements OnInit {
               private toastService: ToastService,
               private confirmationService: ConfirmationService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadPage();
   }
 
-  private loadPage = () => {
+  private loadPage(): void {
     this.movieEntity = new Movie();
     let launch = null;
 
@@ -74,9 +74,11 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  isNew = () => this.activatedRoute.snapshot.params.id === 'new';
+  public isNew(): boolean {
+    return this.activatedRoute.snapshot.params.id === 'new';
+  }
 
-  private validNew = async () => {
+  private async validNew(): Promise<boolean> {
     const movie = (await this.movieService.get(this.movieEntity.id).toPromise())[0];
     if (movie) {
       this.toastService.error(this.translate.instant('error.title'),
@@ -87,7 +89,7 @@ export class MovieDetailComponent implements OnInit {
     return true;
   }
 
-  onSave = async () => {
+  public async onSave(): Promise<void> {
     this.spinner.show();
 
     this.movieEntity = this.movieFormGroup.value;
@@ -110,12 +112,13 @@ export class MovieDetailComponent implements OnInit {
           this.toastService.success(this.translate.instant('success.title'),
                                     this.translate.instant('success.message',
                                                            {entity: this.translate.instant('movie.entity')}));
+          this.goBack();
           this.spinner.hide();
         });
     }
   }
 
-  onConfirmRemove = () => {
+  public onConfirmRemove(): void {
     this.confirmationService.confirm({
       message:  this.translate.instant('confirm.message', {entity: this.translate.instant('movie.entity')}),
       header: this.translate.instant('confirm.title'),
@@ -127,7 +130,7 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  onRemove = () => {
+  public onRemove(): void {
     this.movieService.delete(this.activatedRoute.snapshot.params.id).toPromise()
       .then(() => {
         this.toastService.success(
@@ -138,15 +141,15 @@ export class MovieDetailComponent implements OnInit {
       });
   }
 
-  onImgError = event => {
+  public onImgError(event): void {
     event.target.src = 'assets/img/no-image.png';
   }
 
-  onLoadImage = () => {
+  public onLoadImage(): void {
     this.movieEntity.url = this.movieFormGroup.get('url').value;
   }
 
-  goBack = () => {
+  public goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.activatedRoute.parent });
   }
 }
