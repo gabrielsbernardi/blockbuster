@@ -34,11 +34,55 @@
     }
   },
   "movie": {
-    "list": {
-
-    },
-    "edit": {
-      "product-type": "Tipo do Produto"
+    "entity": "Filme",
+    "title": "Título",
+    "url": "URL",
+    "price": "Preço",
+    "launch": "Lançamento",
+    "evaluation": "Avaliação",
+    "main-directors": "Principais Diretores",
+    "gender": "Gênero",
+    "description": "Descrição",
+    "number": "Número",
+    "main-actors": "Principais Atores",
+    "language": "Idioma",
+    "provider": "Fornecedor",
+    "product-type": "Tipo do Produto",
+    "movie-type": "Tipo do Filme",
+    "cover": "Capa"
+  },
+  "confirm": {
+    "title": "Confirmação",
+    "message": "Confirma a remoção do {{entity}}"
+  },
+  "in": "De",
+  "to": "Até",
+  "filter": "Filtrar",
+  "clear": "Limpar",
+  "new": "Novo",
+  "select-gender": "Selecione o Gênero",
+  "registered-movies": "Filmes cadastrados",
+  "filters": "Filtros",
+  "save": "Salvar",
+  "come-back": "Voltar",
+  "yes": "Sim",
+  "no": "Não",
+  "error": {
+    "title": "Erro",
+    "movie": {
+      "already-exists": "Filme com o número {{id}} já existe com o nome: {{title}}"
     }
+  },
+  "success": {
+    "title": "Sucesso",
+    "message": "{{entity}} salvo com sucesso"
+  },
+  "delete": {
+    "title": "Excluir",
+    "success": "Sucesso",
+    "message": "{{entity}} excluído com sucesso"
+  },
+  "menu": {
+    "film": "Filme"
   }
 }

@@ -79,7 +79,8 @@ export class MovieDetailComponent implements OnInit {
   private validNew = async () => {
     const movie = (await this.movieService.get(this.movieEntity.id).toPromise())[0];
     if (movie) {
-      this.toastService.error('Erro', `Filme com o número ${movie.id} já existe com o nome ${movie.title}`);
+      this.toastService.error(this.translate.instant('error.title'),
+                              this.translate.instant('error.movie.already-exists', {id: movie.id, title: movie.title}));
       this.spinner.hide();
       return false;
     }
@@ -94,7 +95,9 @@ export class MovieDetailComponent implements OnInit {
       if (await this.validNew()) {
         this.movieService.save(this.movieEntity).toPromise()
           .then((movieResponse: Movie) => {
-            this.toastService.success('Filme salvo com sucesso', 'Sucesso');
+            this.toastService.success(this.translate.instant('success.title'),
+                                      this.translate.instant('success.message',
+                                                             {entity: this.translate.instant('movie.entity')}));
             this.router.navigate(['../', movieResponse.id], {
               relativeTo: this.activatedRoute.parent
             });
@@ -103,11 +106,10 @@ export class MovieDetailComponent implements OnInit {
       }
     } else {
       this.movieService.update(this.activatedRoute.snapshot.params.id, this.movieEntity).toPromise()
-        .then((movieResponse: Movie) => {
-          this.toastService.success('Filme salvo com sucesso', 'Sucesso');
-          this.router.navigate(['../', movieResponse.id], {
-            relativeTo: this.activatedRoute.parent
-          });
+        .then(() => {
+          this.toastService.success(this.translate.instant('success.title'),
+                                    this.translate.instant('success.message',
+                                                           {entity: this.translate.instant('movie.entity')}));
           this.spinner.hide();
         });
     }
@@ -115,10 +117,10 @@ export class MovieDetailComponent implements OnInit {
 
   onConfirmRemove = () => {
     this.confirmationService.confirm({
-      message: 'Confirma a exclusão do filme?',
-      header: 'Confirmação',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
+      message:  this.translate.instant('confirm.message', {entity: this.translate.instant('movie.entity')}),
+      header: this.translate.instant('confirm.title'),
+      acceptLabel: this.translate.instant('yes'),
+      rejectLabel: this.translate.instant('no'),
       accept: () => {
           this.onRemove();
       }
@@ -129,8 +131,8 @@ export class MovieDetailComponent implements OnInit {
     this.movieService.delete(this.activatedRoute.snapshot.params.id).toPromise()
       .then(() => {
         this.toastService.success(
-          'Filme excluido com sucesso',
-          'Sucesso'
+          this.translate.instant('delete.success'),
+          this.translate.instant('delete.message', {entity: this.translate.instant('movie.entity')})
         );
         this.goBack();
       });

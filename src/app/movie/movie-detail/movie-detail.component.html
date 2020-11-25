@@ -2,74 +2,74 @@
   <p-panel [showHeader]="false">
     <div class="p-grid">
       <div class="p-col-8">
-        <p-fieldset legend="Dados Gerais">
+        <p-fieldset [legend]="'general-data' | translate | uppercase">
           <div class="p-grid">
             <div class="p-col-6">
               <div class="p-field">
-                <label for="number" class="required">Número</label>
+                <label for="number" class="required">{{'movie.number' | translate}}</label>
                 <p-inputNumber inputId="number" formControlName="id"></p-inputNumber>
               </div>
 
               <div class="p-field">
-                <label for="title" class="required">Título</label>
+                <label for="title" class="required">{{'movie.title' | translate}}</label>
                 <input id="title" type="text" formControlName="title" pInputText/>
               </div>
 
               <div class="p-field">
-                <label for="gender" class="required">Gênero</label>
+                <label for="gender" class="required">{{'movie.gender' | translate}}</label>
                 <p-dropdown id="gender" formControlName="gender" [options]="genderTypes"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="mainActors">Principais Atores</label>
+                <label for="mainActors">{{'movie.main-actors' | translate}}</label>
                 <input id="mainActors" type="text" formControlName="mainActors" pInputText/>
               </div>
 
               <div class="p-field">
-                <label for="mainDirectors">Principais Diretores</label>
+                <label for="mainDirectors">{{'movie.main-directors' | translate}}</label>
                 <input id="mainDirectors" type="text" formControlName="mainDirectors" pInputText/>
               </div>
 
               <div class="p-field">
-                <label for="description">Descrição</label>
+                <label for="description">{{'movie.description' | translate}}</label>
                 <textarea id="description" [rows]="5" formControlName="description" pInputTextarea autoResize="autoResize"></textarea>
               </div>
             </div>
 
             <div class="p-col-6">
               <div class="p-field">
-                <label for="languageType" class="required">Idioma</label>
+                <label for="languageType" class="required">{{'movie.language' | translate}}</label>
                 <p-dropdown id="languageType" formControlName="languageType" [options]="languages"></p-dropdown>
               </div>
 
               <div class="margin-b-1rem">
-                <label for="launch">Lançamento</label>
+                <label for="launch">{{'movie.launch' | translate}}</label>
                 <p-calendar id="launch" [showIcon]="true" formControlName="launch" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem"></p-calendar>
               </div>
 
               <div class="p-field">
-                <label for="provider" class="required">Fornecedor</label>
+                <label for="provider" class="required">{{'movie.provider' | translate}}</label>
                 <p-dropdown id="provider" formControlName="provider" [options]="providers"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="productType" class="required">{{ 'movie.edit.product-type' | translate }}</label>
+                <label for="productType" class="required">{{ 'movie.product-type' | translate }}</label>
                 <p-dropdown id="productType" formControlName="productType" [options]="productTypes"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="movieType" class="required">Tipo do Filme</label>
+                <label for="movieType" class="required">{{'movie.movie-type' | translate}}</label>
                 <p-dropdown id="movieType" formControlName="movieType" [options]="movieTypes"></p-dropdown>
               </div>
 
               <div class="p-field">
-                <label for="price" class="required">Preço</label>
+                <label for="price" class="required">{{'movie.price' | translate}}</label>
                 <p-inputNumber id="price" formControlName="price" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2">
                 </p-inputNumber>
               </div>
 
               <div>
-                <label for="evaluation" class="margin-b-05rem">Avaliação</label>
+                <label for="evaluation" class="margin-b-05rem">{{'movie.evaluation' | translate}}</label>
                 <p-rating id="evaluation" formControlName="evaluation" [cancel]="false"></p-rating>
               </div>
             </div>
@@ -78,8 +78,8 @@
       </div>
 
       <div class="p-col-4">
-        <p-fieldset legend="Capa">
-          <label for="url">URL</label>
+        <p-fieldset [legend]="'movie.cover' | translate | uppercase">
+          <label for="url">{{'movie.url' | translate}}</label>
           <div id="url" class="p-inputgroup margin-t-05rem">
             <input type="text" formControlName="url" pInputText>
             <button type="button" pButton pRipple icon="pi pi-refresh" styleClass="p-button-warn" pTooltip="Carregar Imagem" (click)="onLoadImage()"></button>
@@ -90,9 +90,9 @@
     </div>
 
     <p-footer>
-      <p-button type="submit" pRipple label="Salvar" icon="pi pi-save" [disabled]="movieFormGroup.invalid" (click)="movieFormGroup.valid && onSave()"></p-button>
-      <p-button type="button" pRipple label="Excluir" icon="pi pi-trash" styleClass="p-button-danger" [hidden]="isNew()" (click)="onConfirmRemove()"></p-button>
-      <p-button type="button" pRipple label="Voltar" styleClass="p-button-text" (click)="goBack()"></p-button>
+      <p-button type="submit" pRipple [label]="'save' | translate" icon="pi pi-save" [disabled]="movieFormGroup.invalid" (click)="movieFormGroup.valid && onSave()"></p-button>
+      <p-button type="button" pRipple [label]="'delete.title' | translate" icon="pi pi-trash" styleClass="p-button-danger" [hidden]="isNew()" (click)="onConfirmRemove()"></p-button>
+      <p-button type="button" pRipple [label]="'come-back' | translate" styleClass="p-button-text" (click)="goBack()"></p-button>
     </p-footer>
   </p-panel>
 </form>

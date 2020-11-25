@@ -7,10 +7,9 @@
   </div>
 </div>
 
-<p-confirmDialog [baseZIndex]="10000"></p-confirmDialog>
-<p-menu #menu [popup]="true" [model]="items" styleClass="menucus"></p-menu>
-
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true" [zIndex]="2"></ngx-spinner>
-
+<p-confirmDialog [baseZIndex]="10000"></p-confirmDialog>
+<p-menu #menu [popup]="true" [model]="items"></p-menu>
 <p-toast></p-toast>
+
 <router-outlet></router-outlet>

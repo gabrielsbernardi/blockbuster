@@ -16,14 +16,14 @@ export class MovieService {
   private orderByTitleAsc = '_sort=title&_order=asc';
 
   private baseUrl = environment.url;
-  private movieUrl = `${this.baseUrl}/movie?${this.orderByTitleAsc}`;
-  private getMovieByIdUrl = (id: number) => `${this.movieUrl}?id=${id}`;
+  private movieSortUrl = `${this.baseUrl}/movie?${this.orderByTitleAsc}`;
+  private movieUrl = `${this.baseUrl}/movie`;
 
   constructor(public http: HttpClient) { }
 
   getValeus = (): Observable<Movie[]> => this.http.get<Movie[]>(this.movieUrl);
 
-  get = (id: number): Observable<Movie> => this.http.get<Movie>(this.getMovieByIdUrl(id));
+  get = (id: number): Observable<Movie> => this.http.get<Movie>(`${this.movieSortUrl}${getSimpleFilter('id', id, false)}`);
 
   save = (movie: Movie) => this.http.post<Movie>(this.movieUrl, movie);
 
@@ -41,7 +41,7 @@ export class MovieService {
     const filterPrice = getRangeFilter('price', filter.initialPrice, filter.finalPrice);
     const filterEvaluation = getSimpleFilter('evaluation', filter.evaluation, false);
 
-    const url = `${this.movieUrl}?${filterTitle}${filterMainDirectors}${filterGender}${filterDate}${filterPrice}${filterEvaluation}`;
+    const url = `${this.movieSortUrl}?${filterTitle}${filterMainDirectors}${filterGender}${filterDate}${filterPrice}${filterEvaluation}`;
     return this.http.get<Movie[]>(url);
   }
 }

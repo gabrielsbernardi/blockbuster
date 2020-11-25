@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [
-      {label: 'Filme', icon: PrimeIcons.VIDEO, routerLink: ['/movie']}
+      {label: this.translate.instant('menu.film'), icon: PrimeIcons.VIDEO, routerLink: ['/movie']}
     ];
 
     this.router.events.subscribe((event: RouterEvent) => {

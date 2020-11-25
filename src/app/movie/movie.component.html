@@ -1,76 +1,76 @@
 <form [formGroup]="movieFilterFormGroup" class="margin-b-1rem">
-  <p-panel [header]="'Filtros'.toUpperCase()" [toggleable]="true" [(collapsed)]="movieFilterCollapsed">
+  <p-panel [header]="'filters' | translate | uppercase" [toggleable]="true" [(collapsed)]="movieFilterCollapsed">
     <div class="p-grid">
       <div class="p-col-4 p-field">
-        <label for="title">Título</label>
+        <label for="title">{{'movie.title' | translate}}</label>
         <input id="title" type="text" formControlName="title" pInputText/>
       </div>
 
       <div class="p-col-4 p-field">
-        <label for="mainDirectors">Principais Diretores</label>
+        <label for="mainDirectors">{{'movie.main-directors' | translate}}</label>
         <input id="mainDirectors" type="text" formControlName="mainDirectors" pInputText/>
       </div>
 
       <div class="p-col-4 p-field">
-        <label for="gender">Gênero</label>
-        <p-dropdown id="gender" formControlName="gender" [options]="genderTypes" placeholder="Selecione o Gênero" [showClear]="true"></p-dropdown>
+        <label for="gender">{{'movie.gender' | translate}}</label>
+        <p-dropdown id="gender" formControlName="gender" [options]="genderTypes" [placeholder]="'select-gender' | translate" [showClear]="true"></p-dropdown>
       </div>
 
-      <p-fieldset legend="Lançamento" class="p-col-4">
+      <p-fieldset [legend]="'movie.launch' | translate" class="p-col-4">
         <div id="launchRange" class="p-grid">
           <div class="p-col-6">
-            <p-calendar [showIcon]="true" formControlName="initialDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" placeholder="De"></p-calendar>
+            <p-calendar [showIcon]="true" formControlName="initialDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'in' | translate"></p-calendar>
           </div>
           <div class="p-col-6">
-            <p-calendar [showIcon]="true" formControlName="finalDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" placeholder="Até"></p-calendar>
+            <p-calendar [showIcon]="true" formControlName="finalDate" appendTo="body" dateFormat="dd/mm/yy" styleClass="margin-t-05rem" [placeholder]="'to' | translate"></p-calendar>
           </div>
         </div>
       </p-fieldset>
 
-      <p-fieldset legend="Preço" class="p-col-4">
+      <p-fieldset [legend]="'movie.price' | translate" class="p-col-4">
         <div id="priceRange" class="p-grid margin-t-0">
           <div class="p-col-6">
-            <p-inputNumber formControlName="initialPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="De">
+            <p-inputNumber formControlName="initialPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" [placeholder]="'in' | translate">
             </p-inputNumber>
           </div>
           <div class="p-col-6">
-            <p-inputNumber formControlName="finalPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="Até">
+            <p-inputNumber formControlName="finalPrice" prefix="R$ " [minFractionDigits]="2" [maxFractionDigits]="2" [placeholder]="'to' | translate">
             </p-inputNumber>
           </div>
         </div>
       </p-fieldset>
 
       <div class="p-col-4">
-        <label for="evaluation" class="margin-b-05rem">Avaliação</label>
+        <label for="evaluation" class="margin-b-05rem">{{'movie.evaluation' | translate}}</label>
         <p-rating id="evaluation" formControlName="evaluation"></p-rating>
       </div>
     </div>
 
     <p-footer>
-      <p-button type="submit" pRipple icon="pi pi-filter" label="Filtrar" (click)="onSearch()"></p-button>
-      <p-button type="button" pRipple label="Limpar" styleClass="p-button-text" (click)="onClear()"></p-button>
+      <p-button type="submit" pRipple icon="pi pi-filter" [label]="'filter' | translate" (click)="onSearch()"></p-button>
+      <p-button type="button" pRipple [label]="'clear' | translate" styleClass="p-button-text" (click)="onClear()"></p-button>
     </p-footer>
   </p-panel>
 </form>
 
-<p-panel [header]="'Filmes Cadastrados'.toUpperCase()">
+<p-panel [header]="'registered-movies' | translate | uppercase">
   <div *ngIf="movies.length">
     <div class="p-mb-3">
-      <button pButton pRipple label="Novo" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
+      <button pButton pRipple [label]="'new' | translate" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
     </div>
     <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
         selectionMode="single" (onRowSelect)="onRowSelect($event.data)" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
           <tr>
-              <th>Título</th>
-              <th>Capa</th>
-              <th>Preço</th>
-              <th>Lançamento</th>
-              <th>Avaliação</th>
-              <th>Principais Diretores</th>
-              <th>Gênero</th>
-              <th>Descrição</th>
+              <th id="title">{{'movie.title' | translate}}</th>
+              <th id="url">{{'movie.url' | translate}}</th>
+              <th id="price">{{'movie.price' | translate}}</th>
+              <th id="launch">{{'movie.launch' | translate}}</th>
+              <th id="evaluation">{{'movie.evaluation' | translate}}</th>
+              <th id="mainDirectors">{{'movie.main-directors' | translate}}</th>
+              <th id="gender">{{'movie.gender' | translate}}</th>
+              <th id="description">{{'movie.description' | translate}}</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-movie>
@@ -93,8 +93,8 @@
       <em class="pi pi-inbox font-size-6rem icon-color"></em>
     </div>
     <div>
-      <label class="font-size-1rem bold">Nenhum registro encontrado</label>
+      <label class="font-size-1rem bold">{{'error.no-records-found' | translate}}</label>
     </div>
-    <p-button type="button" styleClass="margin-t-07rem" label="Adicionar" (click)="onRowSelect(null)"></p-button>
+    <p-button type="button" styleClass="margin-t-07rem" [label]="'add' | translate" (click)="onRowSelect(null)"></p-button>
   </div>
 </p-panel>
