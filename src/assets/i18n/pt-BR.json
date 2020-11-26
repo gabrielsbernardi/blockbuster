@@ -85,5 +85,9 @@
   },
   "menu": {
     "film": "Filme"
-  }
+  },
+  "export": {
+    "pdf": "Exportar PDF"
+  },
+  "stars": "Estrela(s)"
 }

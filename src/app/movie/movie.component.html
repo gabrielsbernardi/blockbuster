@@ -57,9 +57,17 @@
 
 <p-panel [header]="'registered-movies' | translate | uppercase">
   <div *ngIf="hasData">
-    <div class="p-mb-3">
-      <button pButton pRipple [label]="'add' | translate" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <button pButton pRipple [label]="'add' | translate" icon="pi pi-plus" (click)="onRowSelect(null)" class="p-mr-2"></button>
+      </div>
+
+      <div class="p-col-6 text-align-end">
+        <p-button pRipple [label]="'export.pdf' | translate" icon="pi pi-upload" styleClass="p-button-text" (click)="exportPDF()"></p-button>
+      </div>
     </div>
+
     <p-table [value]="movies" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="{first} de {last} dos {totalRecords} filmes" [rowsPerPageOptions]="[10,25,50]"
         selectionMode="single" (onRowSelect)="onRowSelect($event.data)" styleClass="p-datatable-striped">
