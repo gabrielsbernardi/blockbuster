@@ -10,7 +10,8 @@ Projeto gerado com [Angular CLI](https://github.com/angular/angular-cli) versão
 - Na pasta _src\assets\data_ deste projeto tem um arquivo exemplo chamado **db.json**:
     - Copie o arquivo para sua máquina
     - No diretório copiado executar o seguinte comando `json-server --watch db.json`
-    - Note que vai subir um servidor local na porta 3000 _http://localhost:3000_
+    - Note que vai subir um servidor local na porta 3000 (_http://localhost:3000_)
+
 **OBS: Não executar o serve apontado para o arquivo que está na raiz do projeto, pois a cada update no arquivo para a execução das operações é interpretado como uma nova atualização em arquivo e ocorre o live reload**
 
 #### Executando o projeto
