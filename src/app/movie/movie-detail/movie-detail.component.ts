@@ -103,6 +103,7 @@ export class MovieDetailComponent implements OnInit {
             this.router.navigate(['../', movieResponse.id], {
               relativeTo: this.activatedRoute.parent
             });
+            this.movieFormGroup.get('id').disable();
             this.spinner.hide();
           });
       }
